@@ -7,25 +7,68 @@ import {
   FaCrown,
 } from "react-icons/fa";
 
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
+
 const LandingPage: React.FC = () => {
+  // --- Subscriber Count ---
+  const [subscriberCount, setSubscriberCount] = useState<number>(() => {
+    return parseInt(localStorage.getItem("subscriberCount") || "0", 10);
+  });
+
+  const handleSubscribe = () => {
+    // Track Facebook Pixel Event
+    if (window.fbq) {
+      window.fbq("track", "Subscribe");
+    }
+
+    const newCount = subscriberCount + 1;
+    setSubscriberCount(newCount);
+    localStorage.setItem("subscriberCount", newCount.toString());
+
+    alert("Subscribed successfully!");
+  };
+
+  // --- Facebook Pixel Init ---
+  useEffect(() => {
+    if (!window.fbq) {
+      !(function (f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = true;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = true;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+
+      window.fbq("init", "583733404633177");
+      window.fbq("track", "PageView");
+    }
+  }, []);
+
+  // --- Countdown Timer ---
   const calculateTimeLeft = () => {
     const now = new Date();
     const end = new Date();
-    end.setHours(24, 0, 0, 0); // Set end to midnight tonight
-
-    if (now > end) end.setDate(end.getDate() + 1); // next day if past midnight
-
+    end.setHours(24, 0, 0, 0);
+    if (now > end) end.setDate(end.getDate() + 1);
     const difference = +end - +now;
-
     return {
-      hours: String(Math.floor((difference / (1000 * 60 * 60)) % 24)).padStart(
-        2,
-        "0"
-      ),
-      minutes: String(Math.floor((difference / (1000 * 60)) % 60)).padStart(
-        2,
-        "0"
-      ),
+      hours: String(Math.floor((difference / (1000 * 60 * 60)) % 24)).padStart(2, "0"),
+      minutes: String(Math.floor((difference / (1000 * 60)) % 60)).padStart(2, "0"),
       seconds: String(Math.floor((difference / 1000) % 60)).padStart(2, "0"),
     };
   };
@@ -59,7 +102,6 @@ const LandingPage: React.FC = () => {
         />
       </div>
 
-      <p className="mb-2 text-sm text-gray-300"></p>
       <div className="flex gap-4 text-center font-bold text-lg mb-8">
         {["hours", "minutes", "seconds"].map((unit) => (
           <div key={unit}>
@@ -80,6 +122,16 @@ const LandingPage: React.FC = () => {
         <FaTelegramPlane className="text-xl" />
         Join Elite Telegram
       </a>
+
+      <div className="mt-6 text-white text-center">
+        <h2 className="text-lg font-bold">Total Subscribers: {subscriberCount}</h2>
+        <button
+          onClick={handleSubscribe}
+          className="mt-2 px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-full shadow-md transition"
+        >
+          Subscribe Now
+        </button>
+      </div>
 
       <div className="mt-12 w-full max-w-5xl text-center">
         <h2 className="text-2xl font-bold mb-2 text-white">Elite Queen Benefits</h2>
