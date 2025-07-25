@@ -40,7 +40,7 @@ const LandingPage: React.FC = () => {
       </div>
 
       <div className="w-28 h-28 rounded-full border-4 border-pink-500 overflow-hidden mb-4 shadow-lg">
-        <img src="/queen.png" alt="Queen" className="object-cover w-full h-full" />
+        <img src="https://ibb.co/nMzXN7TW" alt="Queen" className="object-cover w-full h-full" />
       </div>
 
       <p className="mb-2 text-sm text-gray-300">⏳ Countdown to Midnight Reset:</p>
