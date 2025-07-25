@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FaGift, FaHeadset, FaBullseye, FaTelegramPlane, FaCrown } from "react-icons/fa";
+import {
+  FaGift,
+  FaHeadset,
+  FaBullseye,
+  FaTelegramPlane,
+  FaCrown,
+} from "react-icons/fa";
 
 const LandingPage: React.FC = () => {
   const calculateTimeLeft = () => {
@@ -12,8 +18,14 @@ const LandingPage: React.FC = () => {
     const difference = +end - +now;
 
     return {
-      hours: String(Math.floor((difference / (1000 * 60 * 60)) % 24)).padStart(2, "0"),
-      minutes: String(Math.floor((difference / (1000 * 60)) % 60)).padStart(2, "0"),
+      hours: String(Math.floor((difference / (1000 * 60 * 60)) % 24)).padStart(
+        2,
+        "0"
+      ),
+      minutes: String(Math.floor((difference / (1000 * 60)) % 60)).padStart(
+        2,
+        "0"
+      ),
       seconds: String(Math.floor((difference / 1000) % 60)).padStart(2, "0"),
     };
   };
@@ -40,7 +52,11 @@ const LandingPage: React.FC = () => {
       </div>
 
       <div className="w-28 h-28 rounded-full border-4 border-pink-500 overflow-hidden mb-4 shadow-lg">
-        <img src="https://i.ibb.co/whMnFSTv/queen.jpg" alt="Queen" className="object-cover w-full h-full" />
+        <img
+          src="https://i.ibb.co/whMnFSTv/queen.jpg"
+          alt="Queen"
+          className="object-cover w-full h-full"
+        />
       </div>
 
       <p className="mb-2 text-sm text-gray-300">⏳ Countdown to Midnight Reset:</p>
@@ -67,7 +83,9 @@ const LandingPage: React.FC = () => {
 
       <div className="mt-12 w-full max-w-5xl text-center">
         <h2 className="text-2xl font-bold mb-2 text-white">Elite Queen Benefits</h2>
-        <p className="text-gray-400 mb-8">Unlock powerful advantages & win like royalty</p>
+        <p className="text-gray-400 mb-8">
+          Unlock powerful advantages & win like royalty
+        </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 px-4">
           {[
@@ -92,10 +110,12 @@ const LandingPage: React.FC = () => {
           ].map((item) => (
             <div
               key={item.title}
-              className={`bg-[#14143b] p-6 rounded-2xl border shadow-xl transition hover:scale-[1.03] ${item.color}`}
+              className={`bg-[#14143b] p-6 rounded-2xl border shadow-xl transition hover:scale-[1.03] ${item.color} flex flex-col items-center text-center`}
             >
               <div className={`text-4xl mb-3 ${item.color}`}>{item.icon}</div>
-              <h3 className={`text-lg font-semibold mb-1 ${item.color}`}>{item.title}</h3>
+              <h3 className={`text-lg font-semibold mb-1 ${item.color}`}>
+                {item.title}
+              </h3>
               <p className="text-gray-300 text-sm">{item.desc}</p>
             </div>
           ))}
