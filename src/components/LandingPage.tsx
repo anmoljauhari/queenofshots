@@ -59,7 +59,7 @@ const LandingPage: React.FC = () => {
         />
       </div>
 
-      <p className="mb-2 text-sm text-gray-300">⏳ Countdown to Midnight Reset:</p>
+      <p className="mb-2 text-sm text-gray-300"></p>
       <div className="flex gap-4 text-center font-bold text-lg mb-8">
         {["hours", "minutes", "seconds"].map((unit) => (
           <div key={unit}>
