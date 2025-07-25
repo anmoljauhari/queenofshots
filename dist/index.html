@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sureshot Queen</title>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '583733404633177');
+      fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
+    <script type="module" crossorigin src="/assets/index-e62fd04b.js"></script>
+    <link rel="stylesheet" href="/assets/index-70772ec9.css">
+  </head>
+
+  <body>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=583733404633177&ev=PageView&noscript=1"
+      />
+    </noscript>
+
+    <div id="root">
+      <h1>Welcome to Sureshot Queen</h1>
+      <p>Subscribe now to get daily updates!</p>
+      <button 
+        style="padding: 10px 20px; font-size: 16px; cursor: pointer;"
+        onclick="subscribeNow()"
+      >Subscribe Now</button>
+    </div>
+
+    <script>
+      function subscribeNow() {
+        // Facebook Pixel subscribe event trigger
+        fbq('track', 'Subscribe');
+
+        // Show confirmation message (optional)
+        alert('Subscribed successfully!');
+      }
+    </script>
+
+    
+  </body>
+</html>
