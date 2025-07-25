@@ -38,6 +38,7 @@ const LandingPage: React.FC = () => {
 
       window.fbq("init", "583733404633177");
       window.fbq("track", "PageView");
+      console.log("📦 Facebook Pixel initialized and PageView tracked");
     }
   }, []);
 
@@ -64,15 +65,21 @@ const LandingPage: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // --- Subscribe Button Click Handler (Final Reference) ---
+  // --- Handle Subscribe Button Click ---
   const handleSubscribeClick = () => {
+    console.log("🔔 Subscribe button clicked");
+
     if (typeof window !== "undefined" && window.fbq) {
+      console.log("📊 Sending FB Pixel 'Subscribe' event...");
       window.fbq("track", "Subscribe", {
         content_name: "telegram channel Join",
         content_category: "Subscription",
       });
+    } else {
+      console.warn("⚠️ Facebook Pixel not initialized");
     }
 
+    console.log("🚀 Opening Telegram channel...");
     window.open("https://t.me/+o7wq9Or7jGk0MmQ1", "_blank");
   };
 
