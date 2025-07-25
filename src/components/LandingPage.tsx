@@ -14,24 +14,6 @@ declare global {
 }
 
 const LandingPage: React.FC = () => {
-  // --- Subscriber Count ---
-  const [subscriberCount, setSubscriberCount] = useState<number>(() => {
-    return parseInt(localStorage.getItem("subscriberCount") || "0", 10);
-  });
-
-  const handleSubscribe = () => {
-    // Track Facebook Pixel Event
-    if (window.fbq) {
-      window.fbq("track", "Subscribe");
-    }
-
-    const newCount = subscriberCount + 1;
-    setSubscriberCount(newCount);
-    localStorage.setItem("subscriberCount", newCount.toString());
-
-    alert("Subscribed successfully!");
-  };
-
   // --- Facebook Pixel Init ---
   useEffect(() => {
     if (!window.fbq) {
@@ -82,6 +64,18 @@ const LandingPage: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // --- Subscribe Button Click Handler (Final Reference) ---
+  const handleSubscribeClick = () => {
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "Subscribe", {
+        content_name: "telegram channel Join",
+        content_category: "Subscription",
+      });
+    }
+
+    window.open("https://t.me/+o7wq9Or7jGk0MmQ1", "_blank");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a23] to-[#1a1a40] text-white px-4 flex flex-col items-center justify-center py-10 font-sans">
       <div className="text-center mb-6">
@@ -113,25 +107,13 @@ const LandingPage: React.FC = () => {
         ))}
       </div>
 
-      <a
-        href="https://t.me/+o7wq9Or7jGk0MmQ1"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:scale-105 transition-transform px-6 py-3 rounded-full font-semibold shadow-xl"
+      <button
+        onClick={handleSubscribeClick}
+        className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-pink-500 hover:scale-105 transition-transform px-6 py-3 rounded-full font-semibold shadow-xl text-black"
       >
         <FaTelegramPlane className="text-xl" />
-        Join Elite Telegram
-      </a>
-
-      <div className="mt-6 text-white text-center">
-        <h2 className="text-lg font-bold">Total Subscribers: {subscriberCount}</h2>
-        <button
-          onClick={handleSubscribe}
-          className="mt-2 px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-full shadow-md transition"
-        >
-          Subscribe Now
-        </button>
-      </div>
+        Subscribe & Join Telegram
+      </button>
 
       <div className="mt-12 w-full max-w-5xl text-center">
         <h2 className="text-2xl font-bold mb-2 text-white">Elite Queen Benefits</h2>
